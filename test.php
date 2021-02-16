@@ -7,15 +7,20 @@ use Behat\Transliterator\Transliterator;
 $file = 'data/UnicodeData.txt';
 $lines = file($file, FILE_IGNORE_NEW_LINES);
 
+printf("start\n");
+
 foreach ($lines as $line) {
     $contents = explode(';', $line);
     // print_r($contents);
     // printf("%s\n", json_encode($contents));
 
     $id = intval($contents[0], 16);
+    if ($id > 0xffff) {
+        break;
+    }
 
     if ($id % 0x100 == 0) {
-        printf("#\n# Characters 0x%04X to 0x%04X\n#\n\n", $id, $id + 0xff);
+        printf("\n#\n# Characters 0x%04X to 0x%04X\n#\n\n", $id, $id + 0xff);
     } else if ($id % 0x10 == 0) {
         printf("\n");
     }
@@ -26,24 +31,14 @@ foreach ($lines as $line) {
     $label = $contents[1];
     $altLabel = $contents[10];
 
-    if ($isControl) {
-        continue;
-    }
+    $value = $isControl ? '' : Transliterator::utf8toAscii($char);
 
-    // $value = $isControl ? '_' : Transliterator::utf8toAscii($char);
-    $value = Transliterator::utf8toAscii($char);
-    switch ($value) {
-        case ' ':
-            $value = '" "';
-            break;
-
-        case '"':
-            $value = "'\"'";
-            break;
-
-        case "'":
-            $value = "\"'\"";
-            break;
+    if ($value != '') {
+        if (trim($value) == '' || strstr($value, "'") !== false) {
+            $value = sprintf('"%s"', $value);
+        } else if (strstr($value, '"') !== false) {
+            $value = sprintf("'%s'", $value);
+        }
     }
 
     if ($value == '') {
@@ -56,3 +51,5 @@ foreach ($lines as $line) {
         $isControl ? $altLabel : $label
     );
 }
+
+printf("\nend\n");
