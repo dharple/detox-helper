@@ -46,13 +46,13 @@ foreach ($lines as $line) {
             break;
     }
 
+    if ($value == '') {
+        printf('# ');
+    }
+
     printf("0x%04X\t\t%s\t# %s\n",
         $id,
         $value,
         $isControl ? $altLabel : $label
     );
-
-    if ($id == 0x17F) {
-        break;
-    }
 }
