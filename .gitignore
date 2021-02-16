@@ -3,8 +3,9 @@
 *.rej
 .phpunit.result.cache
 /.idea/
-/dist/
 /vendor/
 composer-ci.json
 phpcs.xml
 phpunit.xml
+
+/data/
