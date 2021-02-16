@@ -1,0 +1,22 @@
+{
+    "name": "outsanity/detox-helper",
+    "description": "PHP Utilities to help with Detox",
+    "type": "project",
+    "require": {
+        "php": ">=7.4.3",
+        "ext-iconv": "*",
+        "ext-mbstring": "*",
+        "behat/transliterator": "^1.3"
+    },
+    "require-dev": {
+        "outsanity/phpcs": ">=0.4.0",
+        "phpstan/phpstan": "^0.12.76"
+    },
+    "license": "BSD-2-CLAUSE",
+    "authors": [
+        {
+            "name": "Doug Harple",
+            "email": "detox.dharple@gmail.com"
+        }
+    ]
+}
