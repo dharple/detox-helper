@@ -3,10 +3,23 @@
 require_once 'vendor/autoload.php';
 
 use Behat\Transliterator\Transliterator;
+// use Behat\Transliterator\SyncTool;
+
+readfile('header.txt');
+
+// printf("# SyncTool::LIB_VERSION = %s\n\n", SyncTool::LIB_VERSION);
+foreach (file('vendor/behat/transliterator/src/Behat/Transliterator/SyncTool.php') as $line) 
+{
+    if (preg_match('/LIB_VERSION = (.*);/', $line, $matches)) {
+        printf("# Behat\Transliterator\SyncTool::LIB_VERSION = %s\n\n", $matches[1]);
+        break;
+    }
+}
 
 $file = 'data/UnicodeData.txt';
 $lines = file($file, FILE_IGNORE_NEW_LINES);
 
+printf("default\t\t_\n\n");
 printf("start\n");
 
 foreach ($lines as $line) {
@@ -42,7 +55,13 @@ foreach ($lines as $line) {
     }
 
     if ($value == '') {
-        printf('# ');
+        continue;
+        // printf('# ');
+    }
+
+    if (($value == '?' || $value == '[?]') && !preg_match('/(QUESTION|INTERROBANG)/', $label . $altLabel)) {
+        continue;
+        // printf('# ');
     }
 
     printf("0x%04X\t\t%s\t# %s\n",

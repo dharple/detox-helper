@@ -1,0 +1,13 @@
+#
+# I claim no copyright over this file; the contents are 100% derivative.
+# - Doug Harple <detox.dharple@gmail.com>
+#
+# This file is generated from the following sources:
+# - https://www.unicode.org/Public/5.2.0/ucd/UnicodeData.txt
+# - https://metacpan.org/pod/Text::Unidecode
+# - https://github.com/Behat/Transliterator
+#
+# The code to generate it lives here:
+# - https://github.com/dharple/detox-helper/test.php
+#
+
