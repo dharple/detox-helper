@@ -47,7 +47,9 @@ foreach ($lines as $line) {
     $value = $isControl ? '' : Transliterator::utf8toAscii($char);
 
     if ($value != '') {
-        if (trim($value) == '' || strstr($value, "'") !== false) {
+        if (trim($value) == '') {
+            $value = '" "';
+        } else if (strstr($value, "'") !== false) {
             $value = sprintf('"%s"', $value);
         } else if (strstr($value, '"') !== false) {
             $value = sprintf("'%s'", $value);
