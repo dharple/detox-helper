@@ -1,4 +1,4 @@
-#!/usr/bin/env -S php
+#!/usr/bin/env php
 <?php
 
 $file = 'data/UnicodeData.txt';
@@ -30,7 +30,7 @@ $codes = [
     0x1F37A,
 ];
 
-printf("#! /usr/bin/env -S bash\n\n");
+printf("#!/usr/bin/env bash\n\n");
 
 foreach ($codes as $code) {
     $char = mb_chr($code, 'UTF-8');
